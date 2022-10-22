@@ -2,12 +2,22 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import { logout } from "./firebase";
-import { getDatabase, ref, set, onValue } from "firebase/database";
+import {
+  getDatabase,
+  ref,
+  set,
+  onValue,
+  onChildRemoved,
+  onChildChanged,
+  onChildAdded,
+} from "firebase/database";
 import { makeid } from "./utils";
+import NotesList from "./NotesList";
+import { Grid, Fab } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 
 export default function HomeScreen() {
   const [notes, setNotes] = useState([]);
-  const [noteId, setNoteId] = useState([]);
 
   //If not logged then move to root
   useEffect(() => {
@@ -19,95 +29,65 @@ export default function HomeScreen() {
   const newNote = () => {
     const db = getDatabase();
     set(ref(db, `users/${localStorage.getItem("uid")}/notes/${makeid()}`), {
-      title: "la chori",
-      note: " hola shorty",
+      title: "title",
+      note: "note",
+    }).then(() => {
+      refreshData();
     });
-  };
-
-  const noteCard = (key, title, note) => {
-    return (
-      <div
-        className="card-container"
-        id={`${key}-container`}
-        style={{
-          backgroundColor: "red",
-          height: "5%",
-          width: "20%",
-          margin: "10px",
-        }}
-      >
-        <input
-          type="text"
-          placeholder="title"
-          id={`${key}-title`}
-          defaultValue={title}
-        />
-        <input
-          type="text"
-          placeholder="note"
-          id={`${key}-note`}
-          defaultValue={note}
-        />
-        <button
-          id={`${key}-`}
-          onClick={(id) => {
-            submitNote(id.target.id);
-          }}
-        >
-          +
-        </button>
-      </div>
-    );
   };
 
   useEffect(() => {
     const db = getDatabase();
-    const starCountRef = ref(db, `users/${localStorage.getItem("uid")}/notes`);
-    onValue(starCountRef, (snapshot) => {
-      const data = snapshot.val();
-      let dataToInsert = { elements: [], ids: [] };
 
-      Object.entries(data).forEach((obj) => {
-        dataToInsert["elements"].push(
-          noteCard(obj[0], obj[1]["title"], obj[1]["note"])
-        );
-        dataToInsert["ids"].push(obj[0]);
-      });
+    onValue(
+      ref(db, `users/${localStorage.getItem("uid")}/notes`),
+      (snapshot) => {
+        const data = snapshot.val();
+        let dataToRender = [];
+        if (data) {
+          Object.entries(data).forEach((obj) => {
+            dataToRender.push([obj[0], obj[1]]);
+          });
 
-      setNotes(dataToInsert["elements"]);
-      setNoteId(dataToInsert["ids"]);
-    });
+          setNotes(dataToRender);
+        } else {
+          setNotes([]);
+        }
+      }
+    );
   }, []);
 
-  const submitNote = (id) => {
-    let title = document.getElementById(id + "title").value;
-    let note = document.getElementById(id + "note").value;
-
+  const refreshData = () => {
+    let dataToRender = [];
     const db = getDatabase();
-    set(ref(db, `users/${localStorage.getItem("uid")}/notes/${makeid()}`), {
-      title: title,
-      note: note,
-    });
-  };
+    onValue(
+      ref(db, `users/${localStorage.getItem("uid")}/notes`),
+      (snapshot) => {
+        const data = snapshot.val();
+        let dataToRender = [];
+        if (data) {
+          Object.entries(data).forEach((obj) => {
+            dataToRender.push([obj[0], obj[1]]);
+          });
 
-  const test = () => {
-    const db = getDatabase();
-    set(ref(db, `users/${localStorage.getItem("uid")}/notes/`), {
-      title: "a",
-      note: "e",
-    });
+          setNotes(dataToRender);
+        } else {
+          setNotes([]);
+        }
+      }
+    );
   };
 
   return (
-    <div>
+    <div className="main-container">
       <Navbar></Navbar>
       <div>
-        <button onClick={newNote}>new note</button>
-        <button onClick={test}>reset</button>
+        <NotesList data={notes}></NotesList>
       </div>
-      <div>
-        <h2>notes container</h2>
-        {notes}
+      <div className="fab-container">
+        <Fab color="primary" aria-label="add" onClick={newNote}>
+          <AddIcon />
+        </Fab>
       </div>
     </div>
   );
