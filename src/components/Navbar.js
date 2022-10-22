@@ -1,24 +1,16 @@
 import { logout } from './firebase';
-import { useNavigation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import ProfileButton from './Material-Components/ProfileButton';
+import TextField from '@mui/material/TextField';
 
-export default function Navbar() {
-	const [pageToGo, setPageToGo] = useState('');
-
-	//const navigate = useNavigation();
-
-	const container = {
-		color: 'white',
-		backgroundColor: 'DodgerBlue',
-		padding: '10px',
-		fontFamily: 'Arial',
-		display: 'grid',
-		gridTemplateColumns: '20% 80%',
-	};
-
+export default function Navbar(props) {
 	const logInAndSignIn = {
 		position: 'relative',
 		left: '35%',
+	};
+
+	const processLogOut = () => {
+		logout();
+		window.location.pathname = '/';
 	};
 
 	const whenNotLogged = (
@@ -28,22 +20,24 @@ export default function Navbar() {
 		</div>
 	);
 
-	const processLogOut = () => {
-		logout();
-		window.location.pathname = '/';
-	};
-
 	const whenLogged = (
-		<div style={logInAndSignIn}>
-			<h1>ute ta logeao ya</h1>
+		<ProfileButton></ProfileButton>
+
+		/* <div style={logInAndSignIn}>
+			<input type='text' placeholder='Search' />
 			<button onClick={processLogOut}>log out</button>
-		</div>
+		</div> */
 	);
 
 	return (
-		<div style={container}>
-			<h3>la tipica aplicacion de notas otra ve</h3>
-			{localStorage.getItem('email') !== null ? whenLogged : whenNotLogged}
+		<div className='navbar'>
+			<h1 className='navbar-title'>{props.title}</h1>
+			<div className='navbar-search'>
+				<TextField id='outlined-search' label='Search field' type='search' />
+			</div>
+			<div className='profile-button'>
+				{localStorage.getItem('email') !== null ? whenLogged : whenNotLogged}
+			</div>
 		</div>
 	);
 }
