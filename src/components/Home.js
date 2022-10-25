@@ -16,6 +16,19 @@ import AddIcon from '@mui/icons-material/Add';
 export default function HomeScreen() {
 	const [notes, setNotes] = useState([]);
 
+	//Sort function
+	const sortByDate = (data) => {
+		const tempdata = [];
+		Object.entries(data).forEach((obj) => {
+			tempdata.push(obj);
+		});
+
+		tempdata.sort((a, b) => {
+			return b[1]['orderByDate'] - a[1]['orderByDate'];
+		});
+		return tempdata;
+	};
+
 	//If not logged then move to root
 	useEffect(() => {
 		if (localStorage.getItem('email') == null) {
@@ -81,30 +94,7 @@ export default function HomeScreen() {
 		);
 	}, []);
 
-	const sortByDate = (data) => {
-		const tempdata = [];
-		/* data.sort(function (a, b) {
-			return a - b;
-		}); */
-		//console.log(data);
-
-		Object.entries(data).forEach((obj) => {
-			tempdata.push(obj);
-		});
-
-		tempdata.sort((a, b) => {
-			/* console.log(a[1]['date']);
-			console.log(b); */
-			return b[1]['orderByDate'] - a[1]['orderByDate'];
-		});
-
-		console.log(tempdata);
-		return tempdata;
-	};
-
-	const test = () => {
-		console.log('25/10/2022, 10:39:27 a. m.' < '25/10/2022, 2:43:48 p. m.');
-	};
+	const test = () => {};
 
 	return (
 		<div className='main-container'>
