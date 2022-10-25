@@ -1,19 +1,16 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
-import { logout } from './firebase';
 import {
 	getDatabase,
 	ref,
 	set,
 	onValue,
-	onChildRemoved,
-	onChildChanged,
-	onChildAdded,
+	query,
+	orderByChild,
 } from 'firebase/database';
-import { makeid } from './utils';
+import { makeid, getDateFormated } from './utils';
 import NotesList from './NotesList';
-import { Grid, Fab } from '@mui/material';
+import { Fab } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
 export default function HomeScreen() {
@@ -26,46 +23,31 @@ export default function HomeScreen() {
 		}
 	});
 
+	//Create new note
 	const newNote = () => {
 		const db = getDatabase();
 		set(ref(db, `users/${localStorage.getItem('uid')}/notes/${makeid()}`), {
-			title: 'title',
-			note: 'note',
+			title: '',
+			note: '',
+			date: getDateFormated(),
 		}).then(() => {
 			refreshData();
 		});
 	};
 
-	useEffect(() => {
-		const db = getDatabase();
-
-		onValue(
-			ref(db, `users/${localStorage.getItem('uid')}/notes`),
-			(snapshot) => {
-				const data = snapshot.val();
-				let dataToRender = [];
-				if (data) {
-					Object.entries(data).forEach((obj) => {
-						dataToRender.push([obj[0], obj[1]]);
-					});
-
-					setNotes(dataToRender);
-				} else {
-					setNotes([]);
-				}
-			},
-		);
-	}, []);
-
+	//Get current page title
 	const getTitle = () => {
 		switch (window.location.pathname) {
 			case '/home':
 				return 'Home';
+			case '/':
+				return 'Notes App';
 			default:
 				return 'jeje';
 		}
 	};
 
+	//Refresh data
 	const refreshData = () => {
 		let dataToRender = [];
 		const db = getDatabase();
@@ -87,9 +69,40 @@ export default function HomeScreen() {
 		);
 	};
 
+	//Initialize and listen to changes in page
+	useEffect(() => {
+		const db = getDatabase();
+
+		onValue(
+			ref(db, `users/${localStorage.getItem('uid')}/notes`),
+			(snapshot) => {
+				const data = snapshot.val();
+				let dataToRender = [];
+				if (data) {
+					Object.entries(data).forEach((obj) => {
+						dataToRender.push([obj[0], obj[1]]);
+					});
+
+					setNotes(dataToRender);
+				} else {
+					setNotes([]);
+				}
+			},
+		);
+	}, []);
+
+	const test = () => {
+		const db = getDatabase();
+		const topUserPostsRef = query(
+			ref(db, '/users') /* , orderByChild('starCount') */,
+		);
+		console.log();
+	};
+
 	return (
 		<div className='main-container'>
 			<Navbar title={getTitle()}></Navbar>
+			<button onClick={test}>test</button>
 			<div>
 				<NotesList data={notes}></NotesList>
 			</div>

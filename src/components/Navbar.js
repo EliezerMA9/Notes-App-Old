@@ -8,11 +8,6 @@ export default function Navbar(props) {
 		left: '35%',
 	};
 
-	const processLogOut = () => {
-		logout();
-		window.location.pathname = '/';
-	};
-
 	const whenNotLogged = (
 		<div style={logInAndSignIn}>
 			<a href='/register'>Sign in</a>
@@ -21,23 +16,20 @@ export default function Navbar(props) {
 	);
 
 	const whenLogged = (
-		<ProfileButton></ProfileButton>
-
-		/* <div style={logInAndSignIn}>
-			<input type='text' placeholder='Search' />
-			<button onClick={processLogOut}>log out</button>
-		</div> */
-	);
-
-	return (
-		<div className='navbar'>
-			<h1 className='navbar-title'>{props.title}</h1>
+		<>
 			<div className='navbar-search'>
 				<TextField id='outlined-search' label='Search field' type='search' />
 			</div>
 			<div className='profile-button'>
-				{localStorage.getItem('email') !== null ? whenLogged : whenNotLogged}
+				<ProfileButton></ProfileButton>
 			</div>
+		</>
+	);
+
+	return (
+		<div className='navbar'>
+			<h2 className='navbar-title'>{props.title}</h2>
+			{localStorage.getItem('email') !== null ? whenLogged : whenNotLogged}
 		</div>
 	);
 }

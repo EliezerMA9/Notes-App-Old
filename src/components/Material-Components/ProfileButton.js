@@ -11,6 +11,7 @@ import Tooltip from '@mui/material/Tooltip';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
+import { logout } from '../firebase';
 
 export default function AccountMenu() {
 	const [anchorEl, setAnchorEl] = React.useState(null);
@@ -20,6 +21,10 @@ export default function AccountMenu() {
 	};
 	const handleClose = () => {
 		setAnchorEl(null);
+	};
+	const processLogOut = () => {
+		logout();
+		window.location.pathname = '/';
 	};
 	return (
 		<React.Fragment>
@@ -78,7 +83,11 @@ export default function AccountMenu() {
 					</ListItemIcon>
 					Settings
 				</MenuItem>
-				<MenuItem>
+				<MenuItem
+					onClick={() => {
+						processLogOut();
+					}}
+				>
 					<ListItemIcon>
 						<Logout fontSize='small' />
 					</ListItemIcon>

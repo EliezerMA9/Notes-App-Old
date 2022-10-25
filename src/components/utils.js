@@ -9,4 +9,10 @@ const makeid = () => {
 	return result;
 };
 
-export { makeid };
+const getDateFormated = () => {
+	const dateTime = new Date().toLocaleString();
+
+	return dateTime;
+};
+
+export { makeid, getDateFormated };
