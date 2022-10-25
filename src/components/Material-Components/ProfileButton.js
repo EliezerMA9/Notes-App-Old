@@ -16,16 +16,14 @@ import { logout } from '../firebase';
 export default function AccountMenu() {
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const open = Boolean(anchorEl);
+
 	const handleClick = (event) => {
 		setAnchorEl(event.currentTarget);
 	};
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
-	const processLogOut = () => {
-		logout();
-		window.location.pathname = '/';
-	};
+
 	return (
 		<React.Fragment>
 			<Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
@@ -51,7 +49,7 @@ export default function AccountMenu() {
 				PaperProps={{
 					elevation: 0,
 					sx: {
-						overflow: 'visible',
+						//overflow: 'visible',
 						filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
 						mt: 1.5,
 						'& .MuiAvatar-root': {
@@ -83,11 +81,7 @@ export default function AccountMenu() {
 					</ListItemIcon>
 					Settings
 				</MenuItem>
-				<MenuItem
-					onClick={() => {
-						processLogOut();
-					}}
-				>
+				<MenuItem onClick={logout}>
 					<ListItemIcon>
 						<Logout fontSize='small' />
 					</ListItemIcon>

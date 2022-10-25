@@ -1,0 +1,88 @@
+:root{
+    --inputs-color: #FDCD85;
+    --inputs-width: 25vw;
+    --inputs-height: 8vh;
+    --inputs-border-radius: 10px;
+    --inputs-font-size: 25px;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+}
+
+.register-container{
+    background-color: aliceblue;
+    height: 87%;
+    width: 35%;
+    border-radius: 10px;
+    
+    display: grid;
+    grid-template-rows: 25% auto auto auto 25%;
+}
+
+/*Top container*/
+.title{
+    justify-self: center;
+    align-self: center;
+    font-size: 65px;
+}
+
+/*Username styles*/
+.username-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.username-input{
+	color: black;
+	background-color: var(--inputs-color);
+    outline: none;
+    border-color: transparent;
+    font-size: var(--inputs-font-size);
+    border-radius: var(--inputs-border-radius);
+    height: var(--inputs-height);
+    width: var(--inputs-width);
+}
+
+/*Email styles*/
+.email-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.email-input{
+    color: black;
+	background-color: var(--inputs-color);
+    outline: none;
+    border-color: transparent;
+    font-size: var(--inputs-font-size);
+    border-radius: var(--inputs-border-radius);
+    height: var(--inputs-height);
+    width: var(--inputs-width);
+}
+
+/*Password styles*/
+.password-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.password-input{
+	color: black;
+	background-color: var(--inputs-color);
+    outline: none;
+    border-color: transparent;
+    font-size: var(--inputs-font-size);
+    border-radius: var(--inputs-border-radius);
+    height: var(--inputs-height);
+    width: var(--inputs-width);
+}
+
+::placeholder{
+    color: rgba(0, 0, 0, 0.473);
+}

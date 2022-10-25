@@ -11,6 +11,9 @@ body {
 * {
 	font-family: 'roboto';
 }
+#root {
+	height: 100vh;
+}
 
 .main-container {
 	display: flex;
@@ -94,4 +97,62 @@ body {
 	justify-self: end;
 	align-self: center;
 	width: 60px;
+}
+
+* {
+	font-family: 'roboto';
+}
+
+.main-container {
+	display: flex;
+	justify-content: center;
+	flex-flow: column;
+}
+
+.fab-container {
+	position: fixed;
+	right: 2vw;
+	bottom: 5vh;
+}
+
+.note-card {
+	height: 50vh;
+	width: 30vh;
+	background-color: #395b64;
+	margin: 1%;
+	border-radius: 10px;
+
+	display: grid;
+	grid-template-rows: 10% 80% 7%;
+	grid-row-gap: 1%;
+}
+
+.title-input:focus {
+	outline: none;
+	font-size: 20px;
+	background-color: transparent;
+	border-color: transparent;
+}
+
+.title-input {
+	padding-left: 1vw;
+	outline: none;
+	font-size: 20px;
+	color: white;
+	background-color: transparent;
+	border-color: transparent;
+}
+
+.note-input {
+	padding-left: 1vw;
+	resize: none;
+	outline: transparent;
+	background-color: transparent;
+	border-color: transparent;
+	color: white;
+	font-size: 20px;
+}
+
+::placeholder {
+	color: rgba(255, 255, 255, 0.5);
 }

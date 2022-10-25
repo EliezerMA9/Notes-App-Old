@@ -54,11 +54,17 @@ const sendPasswordReset = async (email) => {
 };
 
 const logout = () => {
-	signOut(auth).then(() => {
-		localStorage.clear('username');
-		localStorage.clear('email');
-		localStorage.clear('uid');
-	});
+	signOut(auth).then(
+		() => {
+			window.location.pathname = '/';
+			localStorage.clear('username');
+			localStorage.clear('email');
+			localStorage.clear('uid');
+		},
+		(e) => {
+			console.log(e);
+		},
+	);
 };
 
 export {

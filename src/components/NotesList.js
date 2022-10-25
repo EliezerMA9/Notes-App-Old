@@ -12,6 +12,7 @@ export default function NotesList({ data }) {
 					title={details[1]['title']}
 					note={details[1]['note']}
 					date={details[1]['date']}
+					orderByDate={details[1]['orderByDate']}
 				/>
 			))}
 		</section>

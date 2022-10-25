@@ -8,7 +8,7 @@ import {
 	query,
 	orderByChild,
 } from 'firebase/database';
-import { makeid, getDateFormated } from './utils';
+import { randomId, getDateFormated } from './utils';
 import NotesList from './NotesList';
 import { Fab } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
@@ -26,10 +26,11 @@ export default function HomeScreen() {
 	//Create new note
 	const newNote = () => {
 		const db = getDatabase();
-		set(ref(db, `users/${localStorage.getItem('uid')}/notes/${makeid()}`), {
+		set(ref(db, `users/${localStorage.getItem('uid')}/notes/${randomId()}`), {
 			title: '',
 			note: '',
 			date: getDateFormated(),
+			orderByDate: Date.now(),
 		}).then(() => {
 			refreshData();
 		});
@@ -49,19 +50,13 @@ export default function HomeScreen() {
 
 	//Refresh data
 	const refreshData = () => {
-		let dataToRender = [];
 		const db = getDatabase();
 		onValue(
 			ref(db, `users/${localStorage.getItem('uid')}/notes`),
 			(snapshot) => {
 				const data = snapshot.val();
-				let dataToRender = [];
 				if (data) {
-					Object.entries(data).forEach((obj) => {
-						dataToRender.push([obj[0], obj[1]]);
-					});
-
-					setNotes(dataToRender);
+					setNotes(sortByDate(data));
 				} else {
 					setNotes([]);
 				}
@@ -77,13 +72,8 @@ export default function HomeScreen() {
 			ref(db, `users/${localStorage.getItem('uid')}/notes`),
 			(snapshot) => {
 				const data = snapshot.val();
-				let dataToRender = [];
 				if (data) {
-					Object.entries(data).forEach((obj) => {
-						dataToRender.push([obj[0], obj[1]]);
-					});
-
-					setNotes(dataToRender);
+					setNotes(sortByDate(data));
 				} else {
 					setNotes([]);
 				}
@@ -91,12 +81,29 @@ export default function HomeScreen() {
 		);
 	}, []);
 
+	const sortByDate = (data) => {
+		const tempdata = [];
+		/* data.sort(function (a, b) {
+			return a - b;
+		}); */
+		//console.log(data);
+
+		Object.entries(data).forEach((obj) => {
+			tempdata.push(obj);
+		});
+
+		tempdata.sort((a, b) => {
+			/* console.log(a[1]['date']);
+			console.log(b); */
+			return b[1]['orderByDate'] - a[1]['orderByDate'];
+		});
+
+		console.log(tempdata);
+		return tempdata;
+	};
+
 	const test = () => {
-		const db = getDatabase();
-		const topUserPostsRef = query(
-			ref(db, '/users') /* , orderByChild('starCount') */,
-		);
-		console.log();
+		console.log('25/10/2022, 10:39:27 a. m.' < '25/10/2022, 2:43:48 p. m.');
 	};
 
 	return (
