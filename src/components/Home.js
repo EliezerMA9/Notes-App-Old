@@ -11,7 +11,7 @@ import {
   onChildChanged,
   onChildAdded,
 } from "firebase/database";
-import { makeid } from "./utils";
+import { randomId } from "./utils";
 import NotesList from "./NotesList";
 import { Grid, Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
@@ -28,7 +28,7 @@ export default function HomeScreen() {
 
   const newNote = () => {
     const db = getDatabase();
-    set(ref(db, `users/${localStorage.getItem("uid")}/notes/${makeid()}`), {
+    set(ref(db, `users/${localStorage.getItem("uid")}/notes/${randomId()}`), {
       title: "title",
       note: "note",
     }).then(() => {
