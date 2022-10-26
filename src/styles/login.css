@@ -1,8 +1,8 @@
 :root{
-    --inputs-color: #FDCD85;
+    --inputs-color: #fdd497;
     --inputs-width: 25vw;
     --inputs-height: 8vh;
-    --inputs-border-radius: 20px;
+    --inputs-border-radius: 10px;
     --inputs-font-size: 25px;
 }
 
@@ -12,10 +12,9 @@
     align-items: center;
     height: 100%;
     width: 100%;
-
 }
 
-.register-container{
+.login-container{
     background-color: aliceblue;
     height: 90vh;
     width: 35vw;
@@ -32,35 +31,8 @@
     font-size: 65px;
 }
 
-/*Username styles*/
-.username-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.username-input{
-    padding-left: 7px;
-    padding-right: 0;
-
-	color: black;
-	background-color: var(--inputs-color);
-    outline: none;
-    border-color: transparent;
-    font-size: var(--inputs-font-size);
-    border-radius: var(--inputs-border-radius);
-    height: var(--inputs-height);
-    width: var(--inputs-width);
-
-    transition: background-color 0.4s;
-}
-.username-input:hover{
-    background-color: #ffc267;
-
-    transition: background-color 0.4s;
-}
-
 /*Email styles*/
-.email-container{
+.input-container{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -68,9 +40,9 @@
 .email-input{
     padding-left: 7px;
     padding-right: 0;
-
+    
     color: black;
-	background-color: var(--inputs-color);
+	background-color: #fdd497;
     outline: none;
     border-color: transparent;
     font-size: var(--inputs-font-size);
@@ -97,7 +69,7 @@
     padding-right: 0;
 
 	color: black;
-	background-color: var(--inputs-color);
+	background-color: #fdd497;
     outline: none;
     border-color: transparent;
     font-size: var(--inputs-font-size);
@@ -111,4 +83,74 @@
     background-color: #ffc267;
 
     transition: background-color 0.4s;
+}
+
+/*Buttons*/
+.top-button-container{
+    display: grid;
+    grid-template-columns: auto auto;
+    width: 25.6vw;
+    margin-left: 7vh;
+}
+
+.login-button{
+    justify-self: end;
+    height: 5vh;
+    width: 10vw;
+    border-radius: 35px;
+    color: white;
+    font-size: 18px;
+
+    cursor: pointer;
+    border: transparent;
+    background-color: #5D78CE;
+    
+    transition: all 0.4s;
+}
+.login-button:hover{
+    background-color: #495ea3;
+    
+    transition: background-color 0.4s;
+}
+
+.forgot-button{
+    height: 5vh;
+    width: 15vw;
+    border-radius: 35px;
+    border: transparent;
+    font-size: 17px;
+
+    cursor: pointer;
+
+    transition: background-color 0.5s;
+}
+.forgot-button:hover{
+    background-color: #a5a5a596;
+
+    transition: background-color 0.5s;
+}
+
+.bottom-button-container{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+    top: 12vh;
+}
+
+.register-button{
+    height: 8vh;
+    width: 15vw;
+    border-radius: 35px;
+    border: transparent;
+    font-size: 17px;
+
+    cursor: pointer;
+
+    transition: background-color 0.5s;
+}
+.register-button:hover{
+    background-color: #a5a5a596;
+
+    transition: background-color 0.5s;
 }

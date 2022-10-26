@@ -36,7 +36,6 @@ export default function RegisterScreen() {
     <div className="container">
       <div className="register-container">
         <p className="title">Register now.</p>
-
         <div className="username-container">
           <input
             className="username-input"
