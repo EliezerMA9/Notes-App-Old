@@ -1,13 +1,6 @@
 import { useEffect, useState } from 'react';
 import Navbar from './Navbar';
-import {
-	getDatabase,
-	ref,
-	set,
-	onValue,
-	query,
-	orderByChild,
-} from 'firebase/database';
+import { getDatabase, ref, set, onValue } from 'firebase/database';
 import { randomId, getDateFormated } from './utils';
 import NotesList from './NotesList';
 import { Fab } from '@mui/material';
@@ -98,7 +91,7 @@ export default function HomeScreen() {
 
 	return (
 		<div className='main-container'>
-			<Navbar title={getTitle()}></Navbar>
+			<Navbar title={getTitle()} ></Navbar>
 			<button onClick={test}>test</button>
 			<div>
 				<NotesList data={notes}></NotesList>

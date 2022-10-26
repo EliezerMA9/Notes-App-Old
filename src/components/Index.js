@@ -1,6 +1,4 @@
 import Navbar from './Navbar';
-import like from '../resources/like_img.png';
-
 export default function IndexScreen() {
 	//Cant go to index
 	if (localStorage.getItem('email') !== null) {
@@ -8,17 +6,11 @@ export default function IndexScreen() {
 	}
 
 	return (
-		<div>
-			<Navbar></Navbar>
-			<h1>tipico proyecto default</h1>
-			<img src={like} alt='' />
-			<button
-				onClick={() => {
-					console.log(localStorage.getItem('email'));
-				}}
-			>
-				asd
-			</button>
+		<div className='main-index-container'>
+			<Navbar title={'Notes app'}></Navbar>
+			<div className='index-container'>
+				<p className='text'>Notes App project used to learn react</p>
+			</div>
 		</div>
 	);
 }

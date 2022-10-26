@@ -3,15 +3,38 @@ import ProfileButton from './Material-Components/ProfileButton';
 import TextField from '@mui/material/TextField';
 
 export default function Navbar(props) {
-	const logInAndSignIn = {
-		position: 'relative',
-		left: '35%',
+	const whenLoggedStyle = {
+		color: 'white',
+		backgroundColor: 'dodgerblue',
+		display: 'grid',
+		gridTemplateColumns: '10% 80% 10%',
+	};
+
+	const whenNotLoggedStyle = {
+		color: 'white',
+		backgroundColor: 'dodgerblue',
+		display: 'grid',
+		gridTemplateColumns: '20% 80%',
 	};
 
 	const whenNotLogged = (
-		<div style={logInAndSignIn}>
-			<a href='/register'>Sign in</a>
-			<a href='/login'>Log in</a>
+		<div className='navbar-buttons-container'>
+			<button
+				className='index-register'
+				onClick={() => {
+					window.location.pathname = '/register';
+				}}
+			>
+				Sign up
+			</button>
+			<button
+				className='index-login'
+				onClick={() => {
+					window.location.pathname = '/login';
+				}}
+			>
+				Log in
+			</button>
 		</div>
 	);
 
@@ -27,8 +50,17 @@ export default function Navbar(props) {
 	);
 
 	return (
-		<div className='navbar'>
-			<h2 className='navbar-title'>{props.title}</h2>
+		<div
+			className='navbar'
+			style={
+				localStorage.getItem('email') !== null
+					? whenLoggedStyle
+					: whenNotLoggedStyle
+			}
+		>
+			<h2 className='navbar-title' style={{ alignSelf: 'center' }}>
+				{props.title}
+			</h2>
 			{localStorage.getItem('email') !== null ? whenLogged : whenNotLogged}
 		</div>
 	);

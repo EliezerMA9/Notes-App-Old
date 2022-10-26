@@ -76,13 +76,6 @@ body {
 	color: rgba(255, 255, 255, 0.5);
 }
 
-.navbar {
-	color: white;
-	background-color: dodgerblue;
-	display: grid;
-	grid-template-columns: 10% 80% 10%;
-}
-
 .navbar-title {
 	margin: 10px;
 }
@@ -153,6 +146,61 @@ body {
 	font-size: 20px;
 }
 
+.index-container {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+
+.text {
+	color: white;
+	font-size: 40px;
+}
+
+.main-index-container {
+	height: 100%;
+}
+
+.navbar-buttons-container {
+	display: flex;
+	justify-content: flex-end;
+	padding: 1vw;
+	gap: 10px;
+}
+
+.index-register {
+	border: transparent;
+	background-color: #fdd497;
+	cursor: pointer;
+	height: 5vh;
+	width: 10vw;
+	border-radius: 15px;
+	font-size: 20px;
+
+	transition: background-color 0.4s;
+}
+.index-register:hover {
+	background-color: #ffc267;
+
+	transition: background-color 0.4s;
+}
+
+.index-login {
+	border: transparent;
+	background-color: #fdd497;
+	cursor: pointer;
+	height: 5vh;
+	width: 10vw;
+	border-radius: 15px;
+	font-size: 20px;
+
+	transition: background-color 0.4s;
+}
+.index-login:hover {
+	background-color: #ffc267;
+
+	transition: background-color 0.4s;
+}
 ::placeholder {
 	color: rgba(59, 59, 59, 0.5);
 }

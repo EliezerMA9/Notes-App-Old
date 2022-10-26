@@ -1,114 +1,182 @@
-:root{
-    --inputs-color: #FDCD85;
-    --inputs-width: 25vw;
-    --inputs-height: 8vh;
-    --inputs-border-radius: 20px;
-    --inputs-font-size: 25px;
+:root {
+	--inputs-color: #fdcd85;
+	--inputs-width: 25vw;
+	--inputs-height: 8vh;
+	--inputs-border-radius: 20px;
+	--inputs-font-size: 25px;
 }
 
-.container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
 }
 
-.register-container{
-    background-color: aliceblue;
-    height: 90vh;
-    width: 35vw;
-    border-radius: 10px;
-    
-    display: grid;
-    grid-template-rows: 25% auto auto auto 25%;
+.register-container {
+	background-color: white;
+	height: 90vh;
+	width: 35vw;
+	border-radius: 10px;
+
+	display: grid;
+	grid-template-rows: 25% auto auto auto 25%;
 }
 
 /*Top container*/
-.title{
-    justify-self: center;
-    align-self: center;
-    font-size: 65px;
+.title {
+	justify-self: center;
+	align-self: center;
+	font-size: 65px;
+	margin-top: 0;
 }
 
 /*Username styles*/
-.username-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.username-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-.username-input{
-    padding-left: 7px;
-    padding-right: 0;
+.username-input {
+	padding-left: 7px;
+	padding-right: 0;
 
 	color: black;
 	background-color: var(--inputs-color);
-    outline: none;
-    border-color: transparent;
-    font-size: var(--inputs-font-size);
-    border-radius: var(--inputs-border-radius);
-    height: var(--inputs-height);
-    width: var(--inputs-width);
+	outline: none;
+	border-color: transparent;
+	font-size: var(--inputs-font-size);
+	border-radius: var(--inputs-border-radius);
+	height: var(--inputs-height);
+	width: var(--inputs-width);
 
-    transition: background-color 0.4s;
+	transition: background-color 0.4s;
 }
-.username-input:hover{
-    background-color: #ffc267;
+.username-input:hover {
+	background-color: #ffc267;
 
-    transition: background-color 0.4s;
+	transition: background-color 0.4s;
 }
 
 /*Email styles*/
-.email-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.email-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-.email-input{
-    padding-left: 7px;
-    padding-right: 0;
-
-    color: black;
-	background-color: var(--inputs-color);
-    outline: none;
-    border-color: transparent;
-    font-size: var(--inputs-font-size);
-    border-radius: var(--inputs-border-radius);
-    height: var(--inputs-height);
-    width: var(--inputs-width);
-
-    transition: background-color 0.4s;
-}
-.email-input:hover{
-    background-color: #ffc267;
-
-    transition: background-color 0.4s;
-}
-
-/*Password styles*/
-.password-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.password-input{
-    padding-left: 7px;
-    padding-right: 0;
+.email-input {
+	padding-left: 7px;
+	padding-right: 0;
 
 	color: black;
 	background-color: var(--inputs-color);
-    outline: none;
-    border-color: transparent;
-    font-size: var(--inputs-font-size);
-    border-radius: var(--inputs-border-radius);
-    height: var(--inputs-height);
-    width: var(--inputs-width);
+	outline: none;
+	border-color: transparent;
+	font-size: var(--inputs-font-size);
+	border-radius: var(--inputs-border-radius);
+	height: var(--inputs-height);
+	width: var(--inputs-width);
 
-    transition: background-color 0.4s;
+	transition: background-color 0.4s;
 }
-.password-input:hover{
-    background-color: #ffc267;
+.email-input:hover {
+	background-color: #ffc267;
 
-    transition: background-color 0.4s;
+	transition: background-color 0.4s;
+}
+
+/*Password styles*/
+.password-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.password-input {
+	padding-left: 7px;
+	padding-right: 0;
+
+	color: black;
+	background-color: var(--inputs-color);
+	outline: none;
+	border-color: transparent;
+	font-size: var(--inputs-font-size);
+	border-radius: var(--inputs-border-radius);
+	height: var(--inputs-height);
+	width: var(--inputs-width);
+
+	transition: background-color 0.4s;
+}
+.password-input:hover {
+	background-color: #ffc267;
+
+	transition: background-color 0.4s;
+}
+
+.register-controls-container {
+	display: grid;
+	align-items: center;
+	justify-content: center;
+}
+
+.process-register-button {
+	justify-self: center;
+	align-self: start;
+	height: 6vh;
+	width: 10vw;
+	border-radius: 35px;
+	color: white;
+	font-size: 18px;
+
+	cursor: pointer;
+	border: transparent;
+	background-color: #5d78ce;
+
+	transition: all 0.4s;
+}
+.process-register-button:hover {
+	background-color: #495ea3;
+
+	transition: background-color 0.4s;
+}
+
+.gotologin-button {
+	height: 8vh;
+	width: 15vw;
+	border-radius: 35px;
+	border: transparent;
+	font-size: 17px;
+
+	cursor: pointer;
+
+	transition: background-color 0.5s;
+}
+.gotologin-button:hover {
+	background-color: #a5a5a596;
+
+	transition: background-color 0.5s;
+}
+
+.top-container {
+	display: flex;
+	flex-direction: column;
+}
+
+.back-home {
+	align-self: start;
+	height: 10vh;
+	width: 12vw;
+
+	border: transparent;
+	background-color: white;
+	font-size: 25px;
+	cursor: pointer;
+	border-radius: 10px;
+
+	transition: background-color 0.5s;
+}
+.back-home:hover {
+	background-color: #a5a5a596;
+
+	transition: background-color 0.5s;
 }
