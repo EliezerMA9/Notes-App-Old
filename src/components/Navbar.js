@@ -7,7 +7,7 @@ export default function Navbar(props) {
 		color: 'white',
 		backgroundColor: 'dodgerblue',
 		display: 'grid',
-		gridTemplateColumns: '10% 80% 10%',
+		gridTemplateColumns: '10% 90%',
 	};
 
 	const whenNotLoggedStyle = {
@@ -39,14 +39,9 @@ export default function Navbar(props) {
 	);
 
 	const whenLogged = (
-		<>
-			<div className='navbar-search'>
-				<TextField id='outlined-search' label='Search field' type='search' />
-			</div>
-			<div className='profile-button'>
-				<ProfileButton></ProfileButton>
-			</div>
-		</>
+		<div className='profile-button'>
+			<ProfileButton></ProfileButton>
+		</div>
 	);
 
 	return (

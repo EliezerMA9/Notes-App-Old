@@ -11,8 +11,9 @@ export default function NotesList({ data }) {
 					nid={details[0]}
 					title={details[1]['title']}
 					note={details[1]['note']}
-					date={details[1]['date']}
-					orderByDate={details[1]['orderByDate']}
+					created={details[1]['date-info']['created']}
+					modified={details[1]['date-info']['modified']}
+					orderBy={details[1]['date-info']['orderBy']}
 				/>
 			))}
 		</section>

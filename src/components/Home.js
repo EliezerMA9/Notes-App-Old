@@ -5,9 +5,11 @@ import { randomId, getDateFormated } from './utils';
 import NotesList from './NotesList';
 import { Fab } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import SearchIcon from '@mui/icons-material/Search';
 
 export default function HomeScreen() {
 	const [notes, setNotes] = useState([]);
+	const [fullData, setFullData] = useState([]);
 
 	//Sort function
 	const sortByDate = (data) => {
@@ -17,9 +19,28 @@ export default function HomeScreen() {
 		});
 
 		tempdata.sort((a, b) => {
-			return b[1]['orderByDate'] - a[1]['orderByDate'];
+			return b[1]['date-info']['orderBy'] - a[1]['date-info']['orderBy'];
 		});
+
 		return tempdata;
+	};
+
+	//Search function
+	const search = (text) => {
+		let temparr = [];
+
+		if (text !== '') {
+			refreshData();
+			fullData.forEach((elem) => {
+				if (elem[1]['note'].includes(text) || elem[1]['title'].includes(text)) {
+					console.log(elem);
+					temparr.push(elem);
+				}
+			});
+			setNotes(temparr);
+		} else {
+			refreshData();
+		}
 	};
 
 	//If not logged then move to root
@@ -35,8 +56,11 @@ export default function HomeScreen() {
 		set(ref(db, `users/${localStorage.getItem('uid')}/notes/${randomId()}`), {
 			title: '',
 			note: '',
-			date: getDateFormated(),
-			orderByDate: Date.now(),
+			'date-info': {
+				created: getDateFormated(),
+				modified: getDateFormated(),
+				orderBy: Date.now(),
+			},
 		}).then(() => {
 			refreshData();
 		});
@@ -62,9 +86,8 @@ export default function HomeScreen() {
 			(snapshot) => {
 				const data = snapshot.val();
 				if (data) {
+					setFullData(sortByDate(data));
 					setNotes(sortByDate(data));
-				} else {
-					setNotes([]);
 				}
 			},
 		);
@@ -79,20 +102,30 @@ export default function HomeScreen() {
 			(snapshot) => {
 				const data = snapshot.val();
 				if (data) {
+					setFullData(sortByDate(data));
 					setNotes(sortByDate(data));
-				} else {
-					setNotes([]);
 				}
 			},
 		);
 	}, []);
 
-	const test = () => {};
+	const test = () => {
+		console.log(fullData);
+	};
 
 	return (
 		<div className='main-container'>
-			<Navbar title={getTitle()} ></Navbar>
-			<button onClick={test}>test</button>
+			<Navbar title={getTitle()}></Navbar>
+			<div className='searchbar-container'>
+				<SearchIcon className='search-icon'></SearchIcon>
+				<input
+					className='search-input'
+					type='text'
+					onChange={(e) => {
+						search(e.target.value);
+					}}
+				/>
+			</div>
 			<div>
 				<NotesList data={notes}></NotesList>
 			</div>
