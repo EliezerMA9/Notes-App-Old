@@ -173,6 +173,9 @@
 	cursor: pointer;
 	border-radius: 10px;
 
+	text-align: left;
+    padding-left: 2vw;
+
 	transition: background-color 0.5s;
 }
 .back-home:hover {
