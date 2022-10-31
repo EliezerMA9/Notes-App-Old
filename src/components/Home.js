@@ -6,10 +6,13 @@ import NotesList from './NotesList';
 import { Fab } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function HomeScreen() {
 	const [notes, setNotes] = useState([]);
 	const [fullData, setFullData] = useState([]);
+	const [loading, setLoading] = useState(false);
 
 	//Sort function
 	const sortByDate = (data) => {
@@ -96,6 +99,7 @@ export default function HomeScreen() {
 
 	//Initialize and listen to changes in page
 	useEffect(() => {
+		setLoading(true);
 		const db = getDatabase();
 
 		onValue(
@@ -123,6 +127,7 @@ export default function HomeScreen() {
 				navbar.classList.remove('sticky');
 			}
 		}
+		setLoading(false);
 	}, []);
 
 	const test = () => {
@@ -140,26 +145,34 @@ export default function HomeScreen() {
 	};
 
 	return (
-		<div className='main-container'>
-			<Navbar title={getTitle()}></Navbar>
-			<div className='searchbar-container'>
-				<SearchIcon className='search-icon'></SearchIcon>
-				<input
-					className='search-input'
-					type='text'
-					onChange={(e) => {
-						search(e.target.value);
-					}}
-				/>
+		<>
+			<div className='main-container'>
+				<Navbar title={getTitle()}></Navbar>
+				<div className='searchbar-container'>
+					<SearchIcon className='search-icon'></SearchIcon>
+					<input
+						className='search-input'
+						type='text'
+						onChange={(e) => {
+							search(e.target.value);
+						}}
+					/>
+				</div>
+				<div>
+					<NotesList data={notes}></NotesList>
+				</div>
+				<div className='fab-container'>
+					<Fab color='primary' aria-label='add' onClick={newNote}>
+						<AddIcon />
+					</Fab>
+				</div>
 			</div>
-			<div>
-				<NotesList data={notes}></NotesList>
-			</div>
-			<div className='fab-container'>
-				<Fab color='primary' aria-label='add' onClick={newNote}>
-					<AddIcon />
-				</Fab>
-			</div>
-		</div>
+			<Backdrop
+				sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+				open={loading}
+			>
+				<CircularProgress color='inherit' />
+			</Backdrop>
+		</>
 	);
 }

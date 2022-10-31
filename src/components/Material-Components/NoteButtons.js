@@ -12,7 +12,7 @@ export default function CardButtons(props) {
 		remove(ref(db, `users/${localStorage.getItem('uid')}/notes/${props.nid}`));
 	};
 
-	const color = ['#395b64', 'red', 'blue', 'white'];
+	const color = ['#1B76D2', '#579ABE', '#C23B23', '#03C03C', '#F39A27'];
 
 	const writeData = (data) => {
 		const db = getDatabase();
@@ -21,9 +21,6 @@ export default function CardButtons(props) {
 
 		if (index + 1 !== color.length) {
 			nextColor = index + 1;
-			console.log(`color lenght: ${color.length}`);
-			console.log(`index: ${index}`);
-			console.log(`nextColor: ${nextColor}`);
 		}
 
 		set(ref(db, `users/${localStorage.getItem('uid')}/notes/${props.nid}`), {
